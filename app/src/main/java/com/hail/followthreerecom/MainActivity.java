@@ -44,8 +44,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int itemId = item.getItemId();
-        switch (itemId) {
+        switch (item.getItemId()) {
             case R.id.mn_home: {
                 Toast.makeText(mContext, "home", Toast.LENGTH_SHORT).show();
                 break;
@@ -59,7 +58,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
             }
         }
-        item.setChecked(true);
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -74,9 +72,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         actionBar.setDisplayHomeAsUpEnabled(true);
         //将drawlayout与toolbar绑定在一起
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.app_name, R.string.app_name);
-        abdt.syncState();//初始化状态
         //设置drawlayout的监听事件 打开/关闭
-        mDrawerLayout.setDrawerListener(abdt);
+        mDrawerLayout.addDrawerListener(abdt);
+        abdt.syncState();//初始化状态
         //actionbar中的内容进行初始化
         mToolbar.setTitleTextColor(getResources().getColor(R.color.white));
     }
@@ -99,5 +97,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         menu.getItem(5).getSubMenu().getItem(0).setChecked(false);
         menu.getItem(5).getSubMenu().getItem(1).setChecked(false);
         item.setChecked(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawers();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
