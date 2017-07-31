@@ -1,5 +1,6 @@
 package com.hail.followthreerecom;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -57,6 +58,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 Toast.makeText(mContext, "music", Toast.LENGTH_SHORT).show();
                 break;
             }
+            case R.id.mn_grade: {
+                startActivity(new Intent(this, GradeActivity.class));
+                break;
+            }
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -94,8 +99,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Menu menu = mNavigation.getMenu();
         MenuItem item = menu.getItem(0);
         //更多中  特殊情况  取消选中状态
-        menu.getItem(5).getSubMenu().getItem(0).setChecked(false);
-        menu.getItem(5).getSubMenu().getItem(1).setChecked(false);
+        menu.getItem(6).getSubMenu().getItem(0).setChecked(false);
+        menu.getItem(6).getSubMenu().getItem(1).setChecked(false);
         item.setChecked(true);
     }
 
